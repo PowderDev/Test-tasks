@@ -31,10 +31,11 @@ $main.addEventListener(
     const videoContainer = document.createElement("div");
     const videoEl = document.createElement("video");
     videoEl.classList.add("video");
-    videoEl.srcObject = new MediaStreamCapture(player);
-    videoEl.onloadedmetadata = () => videoEl.play();
     videoContainer.appendChild(videoEl);
     $main.appendChild(videoContainer);
+    //@ts-expect-error
+    videoEl.srcObject = new MediaStreamCapture(player);
+    videoEl.onloadedmetadata = () => videoEl.play();
 
     let fps = 0;
     player.addEventListener("framereceived", () => fps++);
@@ -63,6 +64,7 @@ $main.addEventListener(
       if (mediaType === "video" && user.videoTrack) {
         const videoContainer = document.createElement("div");
         $main.appendChild(videoContainer);
+        //@ts-expect-error
         user.videoTrack.play($main.children.item($main.children.length - 1));
       }
       if (mediaType === "audio" && user.audioTrack) {
