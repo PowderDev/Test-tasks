@@ -1,0 +1,28 @@
+.sidebar {
+  height: 100vh;
+  background: rgb(212, 211, 211);
+  flex-grow: 0.5;
+  padding: 2rem;
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .button {
+      background: rgb(118, 118, 192);
+      border: none;
+      color: white;
+      padding: 0.9rem 0;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 2px 5px 16px 0px #0b325e, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+}
