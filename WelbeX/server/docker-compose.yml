@@ -1,0 +1,48 @@
+version: "3.7"
+# all the containers have to declare inside services
+services:
+  # App service
+  tinder_clone:
+    links:
+      - postgres
+    # this build context will take the commands from Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image name
+    image: welbex_task-docker
+    # container name
+    container_name: welbex_task
+    # always restart the container if it stops.
+    restart: always
+    # docker run -t is allow
+    tty: true
+    # application port, this is take value from env file
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    # working directory
+    working_dir: /app
+    # application environment
+    environment:
+      SERVICE_NAME: nestchat
+      SERVICE_TAGS: dev
+    # save (persist) data and also to share data between containers
+    volumes:
+      - ./:/app
+      - /app/node_modules
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: WelbeX
+    expose:
+      - 5432
+
+# save (persist) data
+volumes:
+  red_data: {}

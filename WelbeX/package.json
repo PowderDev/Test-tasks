@@ -1,0 +1,12 @@
+{
+  "name": "welbex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start:prod --prefix server",
+    "heroku-postbuild": "cd server && npm install && npx prisma db push"
+  },
+  "author": "",
+  "license": "ISC"
+}
