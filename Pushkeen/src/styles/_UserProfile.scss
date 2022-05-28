@@ -1,0 +1,25 @@
+.user-profile {
+  @apply max-w-7xl m-auto p-6 h-full;
+
+  &-header {
+    h2 {
+      @apply text-4xl;
+    }
+
+    hr {
+      border-top-width: 2px;
+      @apply my-2 border-black;
+    }
+
+    .info-list {
+      @apply flex justify-around;
+
+      &-item {
+        @apply flex flex-col items-center;
+        div {
+          @apply p-2 border-2 border-black text-base;
+        }
+      }
+    }
+  }
+}
