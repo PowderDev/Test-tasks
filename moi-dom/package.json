@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "serve": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix --ext .ts,vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .ts,vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "axios": "^0.27.2",
