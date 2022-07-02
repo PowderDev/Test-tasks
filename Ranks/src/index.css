@@ -12,3 +12,9 @@
   font-family: "Poppins", sans-serif;
   overflow: hidden;
 }
+
+.currency-card {
+  @apply flex gap-4 items-center rounded-lg justify-center 
+  w-56 h-16 shadow-2xl dark:bg-gray-600 
+  dark:text-gray-300 bg-slate-100;
+}

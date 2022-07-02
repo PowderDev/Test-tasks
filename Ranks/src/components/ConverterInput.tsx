@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { NumberInput, Select } from "@mantine/core";
-import { Currency, SetCurrencyFN } from "../types";
+import { FC } from "react"
+import { NumberInput, Select } from "@mantine/core"
+import { Currency, SetCurrencyFN } from "../types"
 
 interface Props {
-  currency: Currency;
-  setCurrency: SetCurrencyFN;
-  currencyList: { value: string; label: string }[];
-  handleInputChange: (value: number) => Promise<void>;
+  currency: Currency
+  setCurrency: SetCurrencyFN
+  currencyList: { value: string; label: string }[]
+  handleInputChange: (value: number) => Promise<void>
 }
 
 const ConverterInput: FC<Props> = ({ currency, currencyList, setCurrency, handleInputChange }) => {
@@ -27,14 +27,14 @@ const ConverterInput: FC<Props> = ({ currency, currencyList, setCurrency, handle
         formatter={(value) => {
           return !Number.isNaN(parseFloat(value || ""))
             ? `${parseFloat(`${currency.value}`)}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            : "";
+            : ""
         }}
         min={1}
         size="xl"
         icon={currency.name}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ConverterInput;
+export default ConverterInput
