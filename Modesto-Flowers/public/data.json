@@ -1,0 +1,40 @@
+[
+  {
+    "question": "How often do you visit our site?",
+    "radios": [
+      { "id": 153451, "content": "A couple of times a month" },
+      { "id": 354351232, "content": "Once a week" },
+      { "id": 658, "content": "Few times a week" },
+      { "id": 3291984, "content": "Every day" },
+      { "id": 532891, "content": "Several times a day" }
+    ]
+  },
+  {
+    "question": "Are you comfortable using our site?",
+    "radios": [
+      { "id": 11231, "content": "Comfortable", "action": { "redirectToStep": 4 } },
+      { "id": 23123, "content": "Not very comfortable" },
+      { "id": 31231, "content": "Very uncomfortable" }
+    ]
+  },
+  {
+    "question": "Tell us what exactly you do not like?",
+    "textarea": { "placeholder": "Enter your answer here...", "disabledWhenSelected": 1432423 },
+    "checkboxes": [{ "id": 1432423, "content": "I do not want to answer" }]
+  },
+  {
+    "question": "Tell us what you like most about our site?",
+    "textarea": { "placeholder": "Enter your answer here...", "disabledWhenSelected": 14322 },
+    "checkboxes": [{ "id": 14322, "content": "I do not want to answer" }]
+  },
+  {
+    "question": "What changes would you like?",
+    "checkboxes": [
+      { "id": 87461, "content": "Design change" },
+      { "id": 438742, "content": "Newsletter" },
+      { "id": 356564, "content": "Online consultations" },
+      { "id": 12344, "content": "Your answer" }
+    ],
+    "textarea": { "placeholder": "Enter your answer here...", "activeWhenSelected": 12344 }
+  }
+]
