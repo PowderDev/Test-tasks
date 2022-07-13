@@ -30,16 +30,7 @@ export default Vue.extend({
   },
   computed: {
     stepperProgress() {
-      const oneStep = 100 / 5
-      let oneBall = 1
-      if (this.step > 1) {
-        if (this.step === 5) {
-          oneBall = 0.3
-        } else {
-          oneBall = 0.5
-        }
-      }
-      return oneStep * (this.step - oneBall) + "%"
+      return (100 / 4) * (this.step - 1) + "%"
     },
   },
 })
