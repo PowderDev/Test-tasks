@@ -10,3 +10,7 @@ export const getRandomArrayWithKeys = (maxLength = 5) => {
 export const getBones = (colAmount = 5, maxBoneAmount = 5) => {
   return Array.from({ length: colAmount }).map(() => getRandomArrayWithKeys(maxBoneAmount))
 }
+
+export const getRandomNumber = (max = 15, min = 3) => {
+  return Math.round(Math.random() * (max - min) + min)
+}

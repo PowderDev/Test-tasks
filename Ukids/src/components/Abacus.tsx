@@ -4,16 +4,16 @@ import { getArrayWithKeys, getBones } from "../helpers"
 import AbacusBone from "./AbacusBone"
 
 interface Props {
-  colAmount?: number
   boneBottomAmount?: number
   boneTopAmount?: number
 }
 
-const Abacus: React.FC<Props> = ({ colAmount = 10, boneBottomAmount = 5, boneTopAmount = 2 }) => {
+const Abacus: React.FC<Props> = ({ boneBottomAmount = 5, boneTopAmount = 2 }) => {
+  const { colDesignURL, colAmount } = useContext(ThemeContext)
+
   const cols = useMemo(() => getArrayWithKeys(colAmount), [colAmount])
-  const topBones = useMemo(() => getBones(colAmount, boneTopAmount), [])
-  const bottomBones = useMemo(() => getBones(colAmount, boneBottomAmount), [])
-  const { colDesignURL } = useContext(ThemeContext)
+  const topBones = useMemo(() => getBones(colAmount, boneTopAmount), [colAmount])
+  const bottomBones = useMemo(() => getBones(colAmount, boneBottomAmount), [colAmount])
 
   useEffect(() => {
     console.log("Updated")
