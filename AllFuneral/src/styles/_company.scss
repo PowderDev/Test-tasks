@@ -1,0 +1,259 @@
+.company {
+  flex-grow: 2;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px 40px;
+
+    &__block {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      gap: 1rem;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    input {
+      margin: 20px 0 20px 25px;
+    }
+
+    label {
+      position: absolute;
+      top: 17%;
+      left: 3%;
+      background: white;
+      padding: 0 3px;
+      font-size: 10px;
+      line-height: 12px;
+      color: #808080;
+    }
+
+    h3 {
+      color: #222222;
+      font-size: 20px;
+      padding: 25px 0 25px 40px;
+    }
+
+    h4 {
+      color: #3b3b3b;
+      font-weight: 300;
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  &__block {
+    padding: 0 40px;
+    margin-bottom: 25px;
+  }
+
+  .data-grid {
+    padding: 15px 0;
+
+    &__row {
+      display: flex;
+      font-size: 0.9rem;
+      line-height: 160%;
+      letter-spacing: 0.25px;
+      color: #3b3b3b;
+      padding: 5px 0;
+
+      label {
+        width: 200px;
+        font-weight: 300;
+      }
+
+      input:read-only {
+        width: 100%;
+        font-weight: 400;
+        outline: none;
+        border: none;
+      }
+
+      input {
+        padding: 5px;
+      }
+    }
+  }
+
+  .bottom-divider {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .image-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    &__item {
+      position: relative;
+      overflow: hidden;
+      width: 160px;
+      text-overflow: ellipsis;
+
+      span {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+      }
+
+      & > img {
+        height: 160px;
+        width: 100%;
+        border-radius: 2px;
+      }
+
+      p {
+        color: #3b3b3b;
+        font-size: 0.8rem;
+      }
+
+      small {
+        color: #808080;
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .popup {
+    width: 320px;
+    height: 180px;
+    background: white;
+    z-index: 22;
+    position: absolute;
+    inset: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    font-size: 1.25rem;
+
+    h4 {
+      color: #3b3b3b;
+    }
+
+    p {
+      color: #3b3b3b;
+      font-size: 0.85rem;
+      padding: 10px 0;
+    }
+
+    &__buttons {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #b9b9b9;
+        padding: 5px 10px;
+        border: none;
+        background: inherit;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .bg-shadow {
+    background: rgb(0, 0, 0);
+    opacity: 0.2;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .add-image-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid #cdcdcd;
+    border-radius: 2px;
+    width: 400px;
+    height: 40px;
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 5%;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    &:hover > span {
+      color: $text-green-dimmed;
+    }
+
+    &:hover,
+    &:active {
+      border-color: #cdcdcd;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      & > span {
+        color: $text-green-bright;
+      }
+    }
+  }
+
+  input {
+    color: #3b3b3b;
+    width: 400px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    border: 1px solid #cdcdcd;
+
+    &:hover {
+      border-color: #808080;
+    }
+
+    &:focus {
+      border-color: #3d3d3d;
+    }
+
+    &.text-green {
+      color: $text-green;
+    }
+  }
+
+  .close_btn {
+    background: red;
+    padding: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

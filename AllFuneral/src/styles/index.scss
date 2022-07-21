@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap");
+
+$text-green: #82b284;
+$text-green-dimmed: #98c88c;
+$text-green-bright: #58a742;
+
+.text-green {
+  color: $text-green !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100vh;
+  font-family: "Noto Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@import "./side-menu";
+@import "./side-panel";
+@import "./company";
+@import "./footer";

@@ -1,0 +1,26 @@
+.side-menu {
+  height: 100vh;
+  width: 48px;
+  background: #82b284;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__icon-container {
+    height: 60px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+      background: #a4c7a5;
+    }
+  }
+}
