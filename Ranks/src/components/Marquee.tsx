@@ -2,14 +2,16 @@ import axios from "axios"
 import gsap from "gsap"
 import { useContext, useEffect, useState } from "react"
 import { storeContext } from "../App"
-import { getCurrenciesURL } from "../utils"
+import { api } from "../http"
 
 const Marquee = () => {
-  const [currencies, setCurrencies] = useState({})
+  const [currencies, setCurrencies] = useState<{ [key: string]: number }>({})
   const { baseCurrency } = useContext(storeContext)
 
   useEffect(() => {
-    axios(getCurrenciesURL(baseCurrency)).then(({ data }) => setCurrencies(data.results))
+    api
+      .get(`fetch-multi?from=${baseCurrency}&to=${import.meta.env._SUPPORTED_CURRENCIES}`)
+      .then(({ data }) => setCurrencies(data.results))
   }, [baseCurrency])
 
   useEffect(() => {
@@ -31,15 +33,13 @@ const Marquee = () => {
   return (
     <div className="flex w-full mt-14 gap-4 fixed bottom-10">
       {Object.keys(currencies).map((key, i) => {
-        //@ts-expect-error
-        const value = currencies[key]
         return (
           <div key={key} className={`currency-card tile-${i}`}>
             <div
               className={`currency-flag currency-flag-${key.toLowerCase()} h-12 w-12 rounded-full`}
             />
             <figure>
-              {value.toFixed(2)} {key}
+              {currencies[key].toFixed(2)} {key}
             </figure>
           </div>
         )

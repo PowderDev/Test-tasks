@@ -1,12 +1,11 @@
 export interface Currency {
-  value: number;
-  name: string;
-  error: string;
+  value: number
+  name: string
 }
 
-export type SetCurrencyFN = (field: "value" | "name" | "error", value: any) => void;
-export type ConvertCurrencyFN = (
+export type SetCurrency = (field: "value" | "name" | "error", value: any) => void
+export type ConvertCurrency = (
   otherCurrency: string,
-  setOtherCurrency: SetCurrencyFN,
+  setOtherCurrency: SetCurrency,
   amount: number
-) => Promise<void>;
+) => Promise<void>

@@ -1,7 +1,7 @@
-import axios from "axios"
-import { useCallback, useState } from "react"
-import { getConverterURL } from "."
-import { ConvertCurrencyFN, Currency, SetCurrencyFN } from "../types"
+import { useCallback, useEffect, useState } from "react"
+import { changeTheme } from "."
+import { api } from "../http"
+import { ConvertCurrency, Currency, SetCurrency } from "../types"
 
 export const useToggle = (initialState = false): [state: boolean, toggle: () => void] => {
   const [state, setState] = useState(initialState)
@@ -11,26 +11,52 @@ export const useToggle = (initialState = false): [state: boolean, toggle: () => 
 
 export const useCurrency = (
   defaultCurrency: string
-): [c: Currency, sc: SetCurrencyFN, cc: ConvertCurrencyFN] => {
+): {
+  currency: Currency
+  setCurrency: SetCurrency
+  convertCurrency: ConvertCurrency
+  loading: boolean
+} => {
+  const [loading, toggleLoading] = useToggle(false)
   const [currency, updateCurrency] = useState<Currency>({
     name: defaultCurrency,
     value: 1,
-    error: "",
   })
 
-  const setCurrency = useCallback<SetCurrencyFN>((field, value) => {
+  const setCurrency = useCallback<SetCurrency>((field, value) => {
     updateCurrency((prev) => ({ ...prev, [field]: value }))
   }, [])
 
   const convertCurrency = async (
-    otherCurrency: string,
-    setOtherCurrency: SetCurrencyFN,
+    currencyConvertTo: string,
+    setCovertToCurrency: SetCurrency,
     amount: number
   ) => {
-    const URL = getConverterURL(currency.name, otherCurrency, amount)
-    const { data } = await axios.get<{ result: { [index: string]: number } }>(URL)
-    setOtherCurrency("value", data.result[otherCurrency])
+    toggleLoading()
+    const { data } = await api.get<{ result: { [index: string]: number } }>(
+      `convert?from=${currency.name}&to=${currencyConvertTo}&amount=${amount}`
+    )
+    setCovertToCurrency("value", data.result[currencyConvertTo])
+    toggleLoading()
   }
 
-  return [currency, setCurrency, convertCurrency]
+  return {
+    currency,
+    setCurrency,
+    convertCurrency,
+    loading,
+  }
+}
+
+export const useTheme = () => {
+  const [theme, setTheme] = useState<"light" | "dark">(
+    (localStorage.getItem("theme") as any) || "light"
+  )
+
+  useEffect(() => changeTheme(theme), [theme])
+
+  return {
+    theme,
+    setTheme,
+  }
 }

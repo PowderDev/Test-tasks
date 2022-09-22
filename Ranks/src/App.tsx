@@ -1,26 +1,26 @@
-import { createContext, useEffect, useState } from "react";
-import ControlPanel from "./components/ControlPanel";
-import Converter from "./components/Converter";
-import Marquee from "./components/Marquee";
+import { createContext, useEffect, useState } from "react"
+import ControlPanel from "./components/ControlPanel"
+import Converter from "./components/Converter"
+import Marquee from "./components/Marquee"
 
 export const storeContext = createContext({
   baseCurrency: "USD",
   setBaseCurrency: (val: string) => {},
-});
+})
 
 function App() {
-  const [baseCurrency, setBaseCurrency] = useState("USD");
+  const [baseCurrency, setBaseCurrency] = useState("USD")
 
   useEffect(() => {
     if (
-      localStorage.theme === "dark" ||
+      localStorage.getItem("theme") === "dark" ||
       (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("dark")
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("dark")
     }
-  }, [localStorage.theme]);
+  }, [])
 
   return (
     <storeContext.Provider value={{ baseCurrency, setBaseCurrency }}>
@@ -30,7 +30,7 @@ function App() {
       </div>
       <Marquee />
     </storeContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App

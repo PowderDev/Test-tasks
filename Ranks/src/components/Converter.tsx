@@ -1,38 +1,42 @@
-import React, { useContext, useEffect, useState } from "react"
-import axios from "axios"
+import { useContext, useEffect, useState } from "react"
 import { convertCurrencyList } from "../utils"
 import ConverterInput from "./ConverterInput"
 import { LoadingOverlay } from "@mantine/core"
 import { useCurrency, useToggle } from "../utils/hooks"
-import { SetCurrencyFN } from "../types"
+import { SetCurrency } from "../types"
 import { storeContext } from "../App"
+import { api } from "../http"
 
 const Converter = () => {
   const { baseCurrency } = useContext(storeContext)
-  const [firstCurrency, setFirstCurrency, convertFirstCurrency] = useCurrency(baseCurrency)
-  const [secondCurrency, setSecondCurrency, convertSecondCurrency] = useCurrency(
-    baseCurrency === "RUB" ? "USD" : "RUB"
-  )
+  const {
+    loading: firstLoading,
+    currency: firstCurrency,
+    setCurrency: setFirstCurrency,
+    convertCurrency: convertFirstCurrency,
+  } = useCurrency(baseCurrency)
+  const {
+    loading: secondLoading,
+    currency: secondCurrency,
+    setCurrency: setSecondCurrency,
+    convertCurrency: convertSecondCurrency,
+  } = useCurrency(baseCurrency === "RUB" ? "USD" : "RUB")
   const [currencyList, setCurrencyList] = useState([] as { value: string; label: string }[])
-  const [loading, toggleLoading] = useToggle(false)
 
   useEffect(() => {
-    const get = async () => {
-      const URL = "https://api.fastforex.io/currencies?api_key=bf363cfdd5-a0fc4609f1-ree2wt"
-      const { data } = await axios.get<{ currencies: any }>(URL)
-      setCurrencyList(convertCurrencyList(data.currencies))
-    }
-    get()
+    api
+      .get<{ currencies: any }>("/currencies")
+      .then(({ data }) => {
+        setCurrencyList(convertCurrencyList(data.currencies))
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [])
 
-  const handleInputChange = async (name: string, setCurrency: SetCurrencyFN, value: number) => {
-    if (
-      value === Math.ceil(firstCurrency.value) ||
-      value === Math.ceil(secondCurrency.value) ||
-      !value
-    )
-      return
-    toggleLoading()
+  const handleInputChange = async (name: string, setCurrency: SetCurrency, value: number) => {
+    if (value === firstCurrency.value || value === secondCurrency.value || !value) return
+
     if (name === firstCurrency.name) {
       setSecondCurrency("value", value)
       await convertSecondCurrency(name, setCurrency, value)
@@ -40,16 +44,12 @@ const Converter = () => {
       setFirstCurrency("value", value)
       await convertFirstCurrency(name, setCurrency, value)
     }
-    toggleLoading()
   }
 
   useEffect(() => {
-    const get = async () => {
-      await convertFirstCurrency(secondCurrency.name, setSecondCurrency, firstCurrency.value)
-    }
-    toggleLoading()
-    get()
-    toggleLoading()
+    convertFirstCurrency(secondCurrency.name, setSecondCurrency, firstCurrency.value).then(() => {
+      console.log(`Converted from ${firstCurrency.name} to ${secondCurrency.name}`)
+    })
   }, [firstCurrency.name, secondCurrency.name])
 
   return (
@@ -70,7 +70,7 @@ const Converter = () => {
           handleInputChange(firstCurrency.name, setFirstCurrency, value)
         }
       />
-      <LoadingOverlay visible={loading} />
+      <LoadingOverlay visible={firstLoading || secondLoading} />
     </div>
   )
 }
